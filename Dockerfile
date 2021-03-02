@@ -10,10 +10,11 @@ RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y mono-complete
 
-RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash
+RUN apt-get install -y curl
+RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
+RUN apt-get install -y nodejs
 RUN dpkg --add-architecture i386
 RUN apt-get update
-RUN apt-get install lib32gcc1 nodejs -y
 RUN adduser --home /home/container container --disabled-password --gecos "" --uid 999
 RUN usermod -a -G container container
 RUN chown -R container:container /home/container
