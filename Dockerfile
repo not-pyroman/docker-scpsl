@@ -8,13 +8,20 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
 RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list
 RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y mono-complete
+
 
 RUN apt-get install -y curl
+RUN apt-get install -y wget
+RUN apt-get install -y lib32gcc1
+RUN apt-get update
 RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
 RUN apt-get install -y nodejs
+RUN npm -v
+RUN npm install -g npm
+RUN apt-get update
 RUN dpkg --add-architecture i386
 RUN apt-get update
+RUN apt-get install -y mono-complete
 RUN adduser --home /home/container container --disabled-password --gecos "" --uid 999
 RUN usermod -a -G container container
 RUN chown -R container:container /home/container
