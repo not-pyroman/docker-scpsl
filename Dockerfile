@@ -26,6 +26,7 @@ RUN apt-get update
 RUN npm install --global yarn
 RUN apt-get update
 RUN apt-get install -y mono-complete
+RUN apt-get install -y gdb nano
 RUN adduser --home /home/container container --disabled-password --gecos "" --uid 999
 RUN usermod -a -G container container
 RUN chown -R container:container /home/container
